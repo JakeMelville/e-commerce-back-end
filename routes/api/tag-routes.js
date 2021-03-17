@@ -48,6 +48,19 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  const updatedTag = await Tag.update(
+    {
+      // All the fields you can update and the data attached to the request body.
+      tag_name: req.body.tag_name,
+    },
+    {
+      // Gets a book based on the book_id given in the request parameters
+      where: {
+        id: req.params.id
+      }
+    }
+  )
+    res.json(updatedTag);
 });
 
 router.delete('/:id', async (req, res) => {
